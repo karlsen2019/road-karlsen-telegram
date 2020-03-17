@@ -29,6 +29,9 @@ public class IdiomService {
         if (!skip && !checkIdiom(answer)) {
             return result;
         }
+        if (totalCount == 0 && skip) {
+            return null;
+        }
         totalCount++;
         return getIdiom(skip ? lastCode : answer);
     }
