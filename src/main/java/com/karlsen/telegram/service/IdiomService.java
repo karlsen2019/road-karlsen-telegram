@@ -1,5 +1,6 @@
 package com.karlsen.telegram.service;
 
+import com.google.common.collect.Lists;
 import com.karlsen.telegram.entity.Idiom;
 import com.karlsen.telegram.enumerate.LevelEnum;
 import com.karlsen.telegram.utils.IdiomUtils;
@@ -62,6 +63,9 @@ public class IdiomService {
     }
 
     public List<String> matchIdiom(String answer) {
+        if (answer == null) {
+            return Lists.newArrayList();
+        }
         String firstCode = answer.substring(answer.length() - 1);
         return idiomMap.keySet().parallelStream().filter(item -> item.startsWith(firstCode)).collect(Collectors.toList());
     }
