@@ -38,9 +38,10 @@ public class IdiomService {
             int index = new Random().nextInt(idiomList.size());
             String idiom = idiomList.get(index);
             lastCode = idiom.substring(idiom.length() - 1);
-            return idiomMap.get(idiom).toString();
+            return idiomMap.get(idiom).toString() + "\n\n" + "已累计接龙总数：" + totalCount;
+        } else {
+            reset();
         }
-        reset();
         return result;
     }
 
@@ -50,9 +51,9 @@ public class IdiomService {
         result.append("太厉害啦，恭喜完成本次成语接龙！！！！");
         result.append("\n");
         result.append("\n");
-        result.append("本次回答总次数为：").append(totalCount);
+        result.append("本次累计接龙总数为：").append(totalCount);
         result.append("\n");
-        result.append("本次等级为：").append(levelEnum.getDesc());
+        result.append("本次接龙等级为：").append(levelEnum.getDesc());
         result.append("\n");
         result.append("\n");
         result.append("输入龙头继续成语接龙：");
