@@ -27,8 +27,11 @@ public class GetUpdateTimer {
     public void getUpdatesTimer() {
         try {
             Update update = getUpdate();
-            if (update != null) {
-                BotApiMethod botApiMethod = roadIdiomBot.onWebhookUpdateReceived(update);
+            if (update == null) {
+                return;
+            }
+            BotApiMethod botApiMethod = roadIdiomBot.onWebhookUpdateReceived(update);
+            if (botApiMethod != null) {
                 roadIdiomBot.execute(botApiMethod);
             }
         } catch (TelegramApiException e) {
@@ -38,10 +41,14 @@ public class GetUpdateTimer {
 
     private Update getUpdate() {
         List<Update> updates = telegramService.getUpdates(offSet + 1);
-        if (!updates.isEmpty()) {
-            offSet = updates.get(0).getUpdateId();
-            return updates.get(0);
+        if (updates.isEmpty()) {
+            return null;
         }
-        return null;
+        riseUpdateId(updates);
+        return updates.get(0);
+    }
+
+    private void riseUpdateId(List<Update> updates) {
+        offSet = updates.get(0).getUpdateId();
     }
 }

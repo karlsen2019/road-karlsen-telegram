@@ -24,28 +24,29 @@ public class IdiomService {
 
     public String playIdiom(String answer) {
         String result = "错，请以【" + lastCode + "】开头";
-        if (!checkIdiom(answer)) {
+        boolean skip = "1".equals(answer);
+        if (!skip && !checkIdiom(answer)) {
             return result;
         }
         totalCount++;
-        return getIdiom(answer);
+        return getIdiom(skip ? lastCode : answer);
     }
 
-    public synchronized String getIdiom(String answer) {
-        String result = getLevelInfo();
+    public String getIdiom(String answer) {
+        String result = getEndResult();
         List<String> idiomList = matchIdiom(answer);
-        if (!idiomList.isEmpty()) {
+        if (idiomList.isEmpty()) {
+            reset();
+        } else {
             int index = new Random().nextInt(idiomList.size());
             String idiom = idiomList.get(index);
             lastCode = idiom.substring(idiom.length() - 1);
             return idiomMap.get(idiom).toString() + "\n\n" + "已累计接龙总数：" + totalCount;
-        } else {
-            reset();
         }
         return result;
     }
 
-    private String getLevelInfo() {
+    private String getEndResult() {
         LevelEnum levelEnum = LevelEnum.getLevel(totalCount / 10);
         StringBuilder result = new StringBuilder();
         result.append("太厉害啦，恭喜完成本次成语接龙！！！！");
