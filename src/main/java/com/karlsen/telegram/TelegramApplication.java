@@ -2,12 +2,14 @@ package com.karlsen.telegram;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.telegram.telegrambots.ApiContextInitializer;
 
 @SpringBootApplication
-public class RoadKarlsenTelegramApplication {
+public class TelegramApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RoadKarlsenTelegramApplication.class, args);
+        ApiContextInitializer.init();
+        SpringApplication.run(TelegramApplication.class, args);
     }
 
 }
