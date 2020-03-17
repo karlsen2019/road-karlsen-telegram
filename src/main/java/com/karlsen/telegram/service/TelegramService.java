@@ -44,7 +44,6 @@ public class TelegramService {
     }
 
     public String getMessage(String text) {
-        return idiomService.getIdiom(text.substring(0, 1));
+        return idiomService.playIdiom(text);
     }
-
 }
