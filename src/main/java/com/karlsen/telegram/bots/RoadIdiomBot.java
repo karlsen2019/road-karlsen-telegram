@@ -26,7 +26,11 @@ public class RoadIdiomBot extends TelegramWebhookBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
             SendMessage sendMessage = new SendMessage();
             sendMessage.setChatId(update.getMessage().getChatId().toString());
-            sendMessage.setText(telegramService.getMessage(update.getMessage().getText().substring(1)));
+            String text = update.getMessage().getText();
+            if (text.startsWith("/")) {
+                text = update.getMessage().getText().substring(1);
+            }
+            sendMessage.setText(telegramService.getMessage(text));
             return sendMessage;
         }
         return null;
