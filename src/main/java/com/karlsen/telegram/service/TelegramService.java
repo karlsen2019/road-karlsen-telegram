@@ -40,4 +40,8 @@ public class TelegramService {
         }
         return Lists.newArrayList();
     }
+
+    public String getMessage(String text) {
+        return text;
+    }
 }
