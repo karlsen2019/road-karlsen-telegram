@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -24,7 +25,7 @@ public class IdiomController {
     }
 
     @GetMapping("getIdiom")
-    public String getIdiom(String firstCode) {
-        return idiomService.getIdiom(firstCode);
+    public List<String> getIdiom(String answer) {
+        return idiomService.matchIdiom(answer);
     }
 }
