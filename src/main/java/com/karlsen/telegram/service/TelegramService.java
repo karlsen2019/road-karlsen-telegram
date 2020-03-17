@@ -17,6 +17,8 @@ import java.util.List;
 public class TelegramService {
     @Resource
     private RoadIdiomBot roadIdiomBot;
+    @Resource
+    private IdiomService idiomService;
 
     public void sendMessage(String message, String chatId) {
         try {
@@ -42,6 +44,7 @@ public class TelegramService {
     }
 
     public String getMessage(String text) {
-        return text;
+        return idiomService.getIdiom(text.substring(0, 1));
     }
+
 }

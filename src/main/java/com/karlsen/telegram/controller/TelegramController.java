@@ -1,5 +1,6 @@
 package com.karlsen.telegram.controller;
 
+import com.karlsen.telegram.service.IdiomService;
 import com.karlsen.telegram.service.TelegramService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,17 @@ import java.util.List;
 public class TelegramController {
     @Resource
     private TelegramService telegramService;
+    @Resource
+    private IdiomService idiomService;
 
     @GetMapping("send")
     public void send(String message) {
         telegramService.sendMessage(message, "-471727083");
+    }
+
+    @GetMapping("sendIdiom")
+    public void sendIdiom(String firstCode) {
+        telegramService.sendMessage(idiomService.getIdiom(firstCode), "-471727083");
     }
 
     @GetMapping("getUpdates")
